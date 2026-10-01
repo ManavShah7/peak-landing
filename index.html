@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Peak — You don’t have to be perfect. Just 90%.</title>
+<meta name="description" content="An iOS fitness companion that unifies nutrition, training and accountability under one AI coach. Built around one belief: you don’t have to be perfect, just 90%." />
+<meta name="theme-color" content="#0B0B0C" />
+<link rel="icon" href="img/icon.png" />
+<link rel="apple-touch-icon" href="img/icon.png" />
+<meta property="og:title" content="Peak — You don’t have to be perfect. Just 90%." />
+<meta property="og:description" content="Nutrition, training and accountability under one AI coach. In beta on iOS." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="img/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root{
+    --ink:#0B0B0C;
+    --surface:#141416;
+    --surface-2:#1C1C1F;
+    --line:#26262A;
+    --lime:#C6DA3F;
+    --lime-dim:#9FB22F;
+    --text:#F5F6F2;
+    --muted:#9A9C96;
+    --r:22px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background:var(--ink);color:var(--text);
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    background:rgba(11,11,12,.72);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease;
+  }
+  nav.scrolled{border-bottom-color:var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .brand svg{width:24px;height:24px;flex:none}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--lime);color:#0B0B0C;
+    font-size:15px;font-weight:600;letter-spacing:-.01em;
+    padding:9px 18px;border-radius:980px;border:0;cursor:pointer;
+    transition:transform .2s cubic-bezier(.22,1,.36,1),background .2s ease;
+  }
+  .btn:hover{background:#D4E85A;transform:scale(1.03)}
+  .btn:active{transform:scale(.98)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--surface);transform:scale(1.03)}
+
+  /* ---------- hero ---------- */
+  header{position:relative;padding:clamp(56px,9vw,104px) 0 0;overflow:hidden}
+  header::before{
+    content:"";position:absolute;left:50%;top:-10%;transform:translateX(-50%);
+    width:min(1100px,130vw);height:620px;pointer-events:none;
+    background:radial-gradient(50% 50% at 50% 50%, rgba(198,218,63,.13), transparent 70%);
+  }
+  .hero{position:relative;text-align:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;color:var(--lime);
+    letter-spacing:.01em;margin-bottom:22px;
+    padding:6px 14px;border-radius:980px;
+    background:rgba(198,218,63,.1);border:1px solid rgba(198,218,63,.22);
+  }
+  h1{
+    font-size:clamp(34px,6.2vw,66px);
+    font-weight:700;line-height:1.03;letter-spacing:-.035em;
+    max-width:100%;margin:0 auto;text-wrap:balance;
+  }
+  h1 .lime{color:var(--lime)}
+  .sub{
+    font-size:clamp(17px,2.1vw,22px);line-height:1.45;color:var(--muted);
+    max-width:46ch;margin:24px auto 0;font-weight:400;letter-spacing:-.01em;
+  }
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .cta-note{font-size:13px;color:#6F716C;margin-top:16px}
+
+  .hero-shot{position:relative;margin:clamp(40px,6vw,64px) auto 0;width:min(300px,68vw)}
+  .hero-shot::after{
+    content:"";position:absolute;inset:auto -14% -6% -14%;height:46%;
+    background:linear-gradient(180deg,transparent,var(--ink) 72%);pointer-events:none;
+  }
+  .phone{
+    border-radius:clamp(30px,6vw,44px);
+    border:1px solid #2A2A2E;
+    box-shadow:0 48px 90px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.03) inset;
+    overflow:hidden;background:#000;
+  }
+  /* The captures are full-length iPhone screens (9:19.6). At that ratio they
+     tower over the copy beside them, so each row shows only the part that
+     carries the point. */
+  .hero-shot .phone{aspect-ratio:9/15;object-fit:cover;object-position:top}
+  .row .shot .phone{aspect-ratio:9/14;object-fit:cover;object-position:top}
+  .row .shot .phone.bottom{object-position:bottom}
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(72px,11vw,128px) 0}
+  .kicker{
+    font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--lime);margin-bottom:14px;
+  }
+  h2{
+    font-size:clamp(30px,4.6vw,52px);font-weight:700;
+    line-height:1.08;letter-spacing:-.03em;max-width:18ch;
+  }
+  .lede{font-size:clamp(16px,1.9vw,19px);line-height:1.6;color:var(--muted);max-width:52ch;margin-top:18px}
+
+  /* the 90% ring */
+  .ring-block{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;text-align:center;justify-items:center}
+  .ring-wrap{width:min(280px,64vw);aspect-ratio:1}
+  .ring-wrap svg{width:100%;height:100%;overflow:visible}
+  .spoke{transform-origin:100px 100px}
+  .ring-block h2,.ring-block .lede{margin-left:auto;margin-right:auto}
+
+  /* feature rows */
+  .row{display:grid;grid-template-columns:1fr;gap:clamp(32px,5vw,64px);align-items:center}
+  .row .shot{width:min(290px,66vw);margin:0 auto}
+  .row .copy{text-align:center}
+  .row .copy h2,.row .copy .lede{margin-left:auto;margin-right:auto}
+
+  .quote{
+    margin-top:24px;padding:16px 20px;border-radius:16px;
+    background:var(--surface);border:1px solid var(--line);
+    font-size:16px;line-height:1.5;color:var(--text);text-align:left;
+    max-width:44ch;
+  }
+  .quote span{color:var(--muted);display:block;margin-top:8px;font-size:14px}
+
+  /* pillars */
+  .pillars{display:grid;grid-template-columns:1fr;gap:16px;margin-top:48px}
+  .pillar{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r);padding:28px 24px;
+    transition:border-color .3s ease,transform .3s cubic-bezier(.22,1,.36,1);
+  }
+  .pillar:hover{border-color:#39393F;transform:translateY(-3px)}
+  .pillar .ic{width:38px;height:38px;margin-bottom:18px;color:var(--lime)}
+  .pillar h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+  .pillar p{font-size:15px;line-height:1.55;color:var(--muted)}
+
+  /* waitlist */
+  .join{text-align:center}
+  .form{display:flex;gap:10px;max-width:440px;margin:30px auto 0;flex-wrap:wrap}
+  .form input{
+    flex:1 1 220px;min-width:0;
+    background:var(--surface);border:1px solid var(--line);color:var(--text);
+    font-size:16px;font-family:inherit;padding:13px 18px;border-radius:980px;outline:none;
+    transition:border-color .2s ease;
+  }
+  .form input:focus{border-color:var(--lime)}
+  .form input::placeholder{color:#6F716C}
+  .form .btn{flex:0 0 auto;padding:13px 24px}
+  .form-msg{font-size:14px;margin-top:14px;min-height:20px;color:var(--lime)}
+  .form-msg.err{color:#E8705A}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:#6F716C;font-size:14px}
+  .foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+  /* reveal */
+  .r{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+  .r.in{opacity:1;transform:none}
+
+  @media (min-width:860px){
+    .ring-block{grid-template-columns:.9fr 1.1fr;text-align:left;justify-items:start}
+    .ring-block h2,.ring-block .lede{margin-left:0}
+    .row{grid-template-columns:1fr 1fr}
+    .row .copy{text-align:left}
+    .row .copy h2,.row .copy .lede{margin-left:0}
+    .row.flip .shot{order:2}
+    .pillars{grid-template-columns:repeat(3,1fr)}
+    .row .shot{width:min(320px,100%)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .r{opacity:1;transform:none;transition:none}
+    .spoke{animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><g id="navspokes"></g></svg>
+      Peak
+    </div>
+    <a href="#join" class="btn">Join the beta</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero">
+    <div class="eyebrow">Now in beta on iOS</div>
+    <h1>You don’t have to be perfect.<br /><span class="lime">Just 90%.</span></h1>
+    <p class="sub">Peak is a fitness companion that holds your whole day — what you eat, how you train, and the friends keeping you honest — in one AI coach.</p>
+    <div class="cta-row">
+      <a href="#join" class="btn">Join the beta</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+    <p class="cta-note">Free during beta · iPhone · iOS 17+</p>
+    <div class="hero-shot">
+      <img class="phone" src="img/home.jpg" alt="Peak home screen showing macro rings, your circle, steps and today’s workout" width="900" height="1956" />
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap ring-block">
+    <div class="ring-wrap r">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><g id="bigspokes"></g></svg>
+    </div>
+    <div class="r">
+      <div class="kicker">The idea</div>
+      <h2>The ring closes at 90%. On purpose.</h2>
+      <p class="lede">Every other tracker is built on all-or-nothing. Weigh the rice. Hit 100%. Miss one day, break the streak, feel like a failure, delete the app.</p>
+      <p class="lede">Peak puts its belief in the shape you see most. That missing slice isn’t a bug in your week — it’s the part you’re allowed to miss. Show up about ninety percent of the time and you are, genuinely, winning.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="r" style="text-align:center">
+      <div class="kicker">One brain</div>
+      <h2 style="margin:0 auto">Three apps’ worth of your life. One coach.</h2>
+      <p class="lede" style="margin:18px auto 0">Your health lives in silos, so the most useful signal — how one part affects another — is invisible. Peak holds all three at once.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar r">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v8a3 3 0 0 0 6 0V3M7 11v10M17 3c-1.7 1.2-2.5 3-2.5 5.5S15.3 13 17 14v7"/></svg>
+        <h3>Nutrition</h3>
+        <p>Type it the way you’d say it. Scan a label when you want exactness. The twenty foods you actually eat, one tap away.</p>
+      </div>
+      <div class="pillar r">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3 9.5v5M21 9.5v5M6.5 12h11"/></svg>
+        <h3>Training</h3>
+        <p>Your sessions sync in from Hevy. Peak reads them against your sleep and your food, then tells you something you didn’t know.</p>
+      </div>
+      <div class="pillar r">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 20c0-3.4 2.8-5.6 6.2-5.6s6.2 2.2 6.2 5.6"/><path d="M16.5 5.6A3.2 3.2 0 0 1 17 12M18 14.8c2.1.7 3.5 2.5 3.5 5.2"/></svg>
+        <h3>Companionship</h3>
+        <p>A small circle who can see you showed up. Tap a friend’s ring to nudge them. No badges, no streak guilt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="shot r"><img class="phone bottom" src="img/logging.jpg" alt="Typing “2 eggs, a scoop of whey, and a banana” and Peak parsing it into eggs, whey and banana with macros" width="900" height="1956" /></div>
+    <div class="copy r">
+      <div class="kicker">Logging</div>
+      <h2>Say it like a person. Not like a database.</h2>
+      <p class="lede">Food logging is the highest-value, highest-abandonment habit in fitness — not because people stop caring, but because the interface makes the good behaviour expensive.</p>
+      <div class="quote">“2 eggs, a scoop of whey, and a banana”<span>→ 381 cal · 37P · 32C · 12F. Logged, with the time you ate it.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row flip">
+    <div class="shot r"><img class="phone" src="img/insights.jpg" alt="Peak insights screen citing studies and your own training data" width="900" height="1956" /></div>
+    <div class="copy r">
+      <div class="kicker">Insights</div>
+      <h2>It earns the right to give advice.</h2>
+      <p class="lede">Generic advice is noise. Every insight in Peak comes from your own behaviour, and every one taps through to the chart that triggered it.</p>
+      <div class="quote">“You’ve been consistent with chest 2× over the last 2 weeks, but glutes keeps getting skipped — no direct sets, not trained once in 2 weeks.”<span>Tap it, and you’re looking at the sets-per-muscle chart that said so.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap row">
+    <div class="shot r"><img class="phone" src="img/circle.jpg" alt="A friend’s profile in Peak showing their rings at 76% through the day, with nudge and challenge options" width="900" height="1956" /></div>
+    <div class="copy r">
+      <div class="kicker">Your circle</div>
+      <h2>Accountability, without the cringe.</h2>
+      <p class="lede">Change is hard alone, and the apps that try to help mostly make it worse — childish badges, or streaks that turn one missed day into quitting.</p>
+      <p class="lede">Peak gives you a few people whose rings you can actually see. Describe a challenge in plain words — "8–10k steps a day for 15 days" — and it quietly lives on both your home screens.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="text-align:center">
+    <div class="r">
+      <div class="kicker">Trust</div>
+      <h2 style="margin:0 auto">A good coach asks. It doesn’t guess.</h2>
+      <p class="lede" style="margin:18px auto 0">The hardest problem in an AI product isn’t intelligence. It’s restraint. When Peak doesn’t know how much milk went into your oats, it asks — because a clarifying question reads as competence, and a confident wrong number reads as a toy.</p>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap join r">
+    <h2 style="margin:0 auto">Be 90%. Starting this week.</h2>
+    <p class="lede" style="margin:18px auto 0">Peak is in beta on iPhone. Leave your email and you’ll get a TestFlight invite in the next round.</p>
+    <form class="form" id="waitlist" novalidate>
+      <input type="email" id="email" placeholder="you@email.com" autocomplete="email" required aria-label="Email address" />
+      <button class="btn" type="submit" id="submit">Request invite</button>
+    </form>
+    <p class="form-msg" id="msg" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>Peak — designed &amp; built by Manav Shah</div>
+    <div><a href="https://manavshah.me">manavshah.me</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // --- the sunburst mark: 60 spokes with a 10% gap, same geometry as the app ---
+  function spokes(el, cx, cy, inner, outer, width, count, filled){
+    if(!el) return;
+    var ns = "http://www.w3.org/2000/svg", out = "";
+    for(var i=0;i<count;i++){
+      var a = (i/count)*Math.PI*2 - Math.PI/2;
+      var x1 = cx + Math.cos(a)*inner, y1 = cy + Math.sin(a)*inner;
+      var x2 = cx + Math.cos(a)*outer, y2 = cy + Math.sin(a)*outer;
+      var on = i < filled;
+      out += '<line class="spoke" x1="'+x1.toFixed(2)+'" y1="'+y1.toFixed(2)+'" x2="'+x2.toFixed(2)+'" y2="'+y2.toFixed(2)+
+             '" stroke="'+(on?'#C6DA3F':'#2A2A2E')+'" stroke-width="'+width+'" stroke-linecap="round"'+
+             (on?' style="animation:none"':'')+' />';
+    }
+    el.innerHTML = out;
+  }
+  spokes(document.getElementById('navspokes'), 12, 12, 5.4, 10.4, 1.1, 36, 33);
+  spokes(document.getElementById('bigspokes'), 100, 100, 58, 94, 3.4, 60, 54);
+
+  // --- nav border on scroll ---
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // --- reveal on scroll ---
+  var els = document.querySelectorAll('.r');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -12% 0px', threshold:.08});
+    els.forEach(function(el, i){ el.style.transitionDelay = ((i%3)*70)+'ms'; io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // --- waitlist ---
+  // Paste your Supabase anon key here to turn the form on.
+  // It is a public, row-level-security-gated key, safe to ship in a page.
+  var SUPABASE_URL = "https://poytwafuljjhehawteed.supabase.co";
+  var SUPABASE_ANON_KEY = "";
+
+  var form = document.getElementById('waitlist');
+  var msg  = document.getElementById('msg');
+  var btn  = document.getElementById('submit');
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var email = document.getElementById('email').value.trim();
+    msg.className = 'form-msg';
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+      msg.className = 'form-msg err'; msg.textContent = 'That email doesn’t look right.'; return;
+    }
+    if(!SUPABASE_ANON_KEY){
+      // Fallback until the key is in: hand the address off over mail.
+      window.location.href = 'mailto:shah.manavd@northeastern.edu'
+        + '?subject=' + encodeURIComponent('Peak beta invite')
+        + '&body='    + encodeURIComponent('Please add me to the Peak beta: ' + email);
+      msg.textContent = 'Opening your mail app…';
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+      method:'POST',
+      headers:{
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email, source: 'landing' })
+    }).then(function(res){
+      if(res.ok || res.status === 409){
+        form.style.display = 'none';
+        msg.textContent = "You're on the list. Invite lands in the next round.";
+      } else {
+        throw new Error(res.status);
+      }
+    }).catch(function(){
+      msg.className = 'form-msg err';
+      msg.textContent = 'Something broke on our end. Try again in a moment.';
+      btn.disabled = false; btn.textContent = 'Request invite';
+    });
+  });
+})();
+</script>
+</body>
+</html>
